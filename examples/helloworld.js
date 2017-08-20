@@ -82,7 +82,7 @@ bot.onEvent('memberships', 'created', (trigger) => {
       console.log(`WARNING: could not POST intro message to room at: ${roomId}`);
       return;
     }
-
+ 
     if (message.roomType === 'group') {
       spark.createMessage(roomId, 'Note I will wake up only when @mentionned.', { markdown: true }, (err) => {
         if (err) {
