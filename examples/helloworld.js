@@ -1,9 +1,23 @@
+//
+// Copyright (c) 2016 Cisco Systems
+// Licensed under the MIT License 
+//
+
+/* 
+ * a Cisco Spark bot that:
+ *   - sends a welcome message as he joins a room, 
+ *   - answers to a /hello command, and greets the user that chatted him
+ *   - supports /help and a fallback helper message
+ *
+ * + leverages the "node-sparkclient" library for Bot to Cisco Spark communications.
+ * 
+ */
+
 var SparkBot = require("node-sparkbot");
 var bot = new SparkBot();
 //bot.interpreter.prefix = "#"; // Remove comment to overlad default / prefix to identify bot commands
 
 var SparkAPIWrapper = require("node-sparkclient");
-
 if (!process.env.SPARK_TOKEN) {
     console.log("Could not start as this bot requires a Cisco Spark API access token.");
     console.log("Please add env variable SPARK_TOKEN on the command line");
@@ -11,7 +25,6 @@ if (!process.env.SPARK_TOKEN) {
     console.log("> SPARK_TOKEN=XXXXXXXXXXXX DEBUG=sparkbot* node helloworld.js");
     process.exit(1);
 }
-
 var spark = new SparkAPIWrapper(process.env.SPARK_TOKEN);
 
 
@@ -56,7 +69,7 @@ bot.onCommand("hello", function (command) {
 //
 bot.onEvent("memberships", "created", function (trigger) {
     var newMembership = trigger.data; // see specs here: https://developer.ciscospark.com/endpoint-memberships-get.html
-    if (newMembership.personId !== bot.interpreter.person.id) {
+    if (newMembership.personId != bot.interpreter.person.id) {
         // ignoring
         console.log("new membership fired, but it is not us being added to a room. Ignoring...");
         return;
@@ -81,3 +94,4 @@ bot.onEvent("memberships", "created", function (trigger) {
         }      
     }); 
 });
+
