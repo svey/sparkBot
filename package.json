@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/svey/sparkBot#readme",
   "dependencies": {
+    "debug": "^3.0.0",
     "node-sparkbot": "^0.10.1"
   }
 }
