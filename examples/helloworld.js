@@ -15,7 +15,7 @@
 
 var SparkBot = require("node-sparkbot");
 var bot = new SparkBot();
-//bot.interpreter.prefix = "#"; // Remove comment to overlad default / prefix to identify bot commands
+bot.interpreter.prefix = "#"; // Remove comment to overlad default / prefix to identify bot commands
 
 var SparkAPIWrapper = require("node-sparkclient");
 if (!process.env.SPARK_TOKEN) {
