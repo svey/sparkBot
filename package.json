@@ -1,0 +1,22 @@
+{
+  "name": "spark-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svey/sparkBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svey/sparkBot/issues"
+  },
+  "homepage": "https://github.com/svey/sparkBot#readme",
+  "dependencies": {
+    "node-sparkbot": "^0.10.1"
+  }
+}
