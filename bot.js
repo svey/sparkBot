@@ -56,7 +56,7 @@ bot.onCommand("hello", function (command) {
 //
 bot.onEvent("memberships", "created", function (trigger) {
     var newMembership = trigger.data; // see specs here: https://developer.ciscospark.com/endpoint-memberships-get.html
-    if (newMembership.personId != bot.interpreter.person.id) {
+    if (newMembership.personId !== bot.interpreter.person.id) {
         // ignoring
         console.log("new membership fired, but it is not us being added to a room. Ignoring...");
         return;
