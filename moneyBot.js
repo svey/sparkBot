@@ -1,11 +1,11 @@
-const SparkBot = require('node-sparkbot');
-const SparkAPIWrapper = require('node-sparkclient');
+var SparkBot = require('node-sparkbot');
+var SparkAPIWrapper = require('node-sparkclient');
 
-const bot = new SparkBot();
-const spark = new SparkAPIWrapper(process.env.SPARK_TOKEN);
+var bot = new SparkBot();
+var spark = new SparkAPIWrapper(process.env.SPARK_TOKEN);
 
 bot.onCommand('fallback', (command) => {
-  const {
+  var {
     roomId
   } = command.message;
   spark.createMessage(roomId, 'There\'s two choices here stranger /bank and /deposit', { markdown: true }, (err) => {
@@ -17,7 +17,7 @@ bot.onCommand('fallback', (command) => {
 });
 
 bot.onCommand('bank', (command) => {
-  const {
+  var {
     //id,
     roomId,
     // roomType,
@@ -32,7 +32,31 @@ bot.onCommand('bank', (command) => {
     // mentionedPeople
   } = command.message;
 
-  spark.createMessage(roomId, `<@personEmail:${personEmail}> the bank is open!`, { markdown: true }, (err) => {
+  spark.createMessage(roomId, `<@personEmail:${personEmail}> the bank is open! Please set /amount`, { markdown: true }, (err) => {
+    if (err) {
+      console.log(`WARNING: couldn't POST /bank at: ${roomId}`);
+      return;
+    }
+  });
+});
+
+bot.onCommand('amount', (command) => {
+  var {
+    //id,
+    roomId,
+    // roomType,
+    // toPersonId,
+    // toPersonEmail,
+    text,
+    // markdown,
+    // files,
+    // personId,
+    personEmail, // Spark User that created the message orginally 
+    // created,
+    // mentionedPeople
+  } = command.message;
+
+  spark.createMessage(roomId, `The amount is set @ ${text.split(' ')[1]}!`, { markdown: true }, (err) => {
     if (err) {
       console.log(`WARNING: couldn't POST /bank at: ${roomId}`);
       return;
@@ -41,7 +65,7 @@ bot.onCommand('bank', (command) => {
 });
 
 bot.onCommand('deposit', (command) => {
-  const {
+  var {
     // id,
     roomId,
     // roomType,
@@ -65,7 +89,7 @@ bot.onCommand('deposit', (command) => {
 });
 
 bot.onEvent('memberships', 'created', (trigger) => {
-  const {
+  var {
     personId,
     roomId
   } = trigger.data; // see specs here: https://developer.ciscospark.com/endpoint-memberships-get.html
